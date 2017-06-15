@@ -41,24 +41,29 @@ namespace TCP_ClientConsole
 
             //Console.WriteLine("You : " + str);
             //Console.WriteLine("Connection :" + client.Connected);
-
-            for (int i = 0; i < 100; i++)
+            try
             {
-                Console.WriteLine("CLIENT");
-                TcpClient client = new TcpClient();
+                for (int i = 0; i < 100; i++)
+                {
+                    Console.WriteLine("CLIENT");
+                    TcpClient client = new TcpClient();
 
-                NetworkStream ns;
-                client.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 11000));
+                    NetworkStream ns;
+                    client.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 11000));
 
-                string str;
-                StreamWriter sw = new StreamWriter(client.GetStream());
-                sw.AutoFlush = true;
-                Console.WriteLine("i= " + i);
-                str = i.ToString();
-                System.Threading.Thread.Sleep(1000);
-                sw.WriteLine(str);
+                    string str;
+                    StreamWriter sw = new StreamWriter(client.GetStream());
+                    sw.AutoFlush = true;
+                    Console.WriteLine("i= " + i);
+                    str = i.ToString();
+                    System.Threading.Thread.Sleep(1000);
+                    sw.WriteLine(str);
+                }
             }
-
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
 
             //sw.WriteLine(str);
 
@@ -72,12 +77,19 @@ namespace TCP_ClientConsole
 
         static void count()
         {
-            for (int i = 0; i<50; i++)
+            try
             {
-                Console.WriteLine("i= " + i);
-                System.Threading.Thread.Sleep(1000);
+                for (int i = 0; i<50; i++)
+                {
+                    Console.WriteLine("i= " + i);
+                    System.Threading.Thread.Sleep(1000);
+                }
+                Console.ReadLine();
             }
-            Console.ReadLine();
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
     }
